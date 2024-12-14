@@ -1,33 +1,27 @@
-
 package org.example.testmodule3.service;
 
 import org.example.testmodule3.model.Category;
 import org.example.testmodule3.model.Product;
-import org.example.testmodule3.repository.IProductRepository;
 import org.example.testmodule3.repository.ProductRepository;
-
-import java.util.Collections;
 import java.util.List;
 
-public class ProductService implements IProductService {
-    private final IProductRepository productRepository = new ProductRepository();
-    @Override
+public class ProductService {
+
+    private final ProductRepository productRepository = new ProductRepository();
+
     public List<Product> getAllProducts() {
-        return productRepository.getAllProducts();
+        return productRepository.findAll();
     }
 
-    @Override
     public void addProduct(Product product) {
-        productRepository.addProduct(product);
+        productRepository.save(product);
     }
 
-    @Override
+    public void deleteProduct(int id) {
+        productRepository.deleteById(id);
+    }
+
     public List<Category> getAllCategories() {
-        return productRepository.getAllCategories();
-    }
-
-    @Override
-    public void deleteProduct(int productId) {
-        productRepository.deleteProduct(productId);
+        return productRepository.findAllCategories();
     }
 }
